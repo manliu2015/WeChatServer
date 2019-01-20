@@ -1,0 +1,11 @@
+{
+    "name": "WeChatServer",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/start_wcs.js"
+    },
+    "dependencies": {
+        "express": "4.16.4"
+    }
+}
