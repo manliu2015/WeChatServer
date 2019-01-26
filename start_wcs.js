@@ -2,6 +2,11 @@
 // Create by manliu Jan/20/2019
 // 启动服务器
 
+// 设置服务器跟路径
+global.getBasePath() {
+	return __dirname
+}
+
 require('./lib/GlobalInit')
 
 // 设置服务器名
@@ -12,20 +17,14 @@ global.serverName = 'wechat_server'
 try {
     logger.I('start init server ...')
 
-    // // 模块管理器
-    // var model = require('./src/ServerManager').GetModel
-    // app.ServerManager = model
-    // var ServerManager = model()
+    // 模块管理器
+    var moduleMgr = require('./src/ModuleManager').getInstance()
+    global.moduleMgr = moduleMgr
 
-    // // 初始化服务器
-    // ServerManager.start(function(errorMsg) {
-    //     if (errorMsg) {
-    //         console.log('server init fail, %s', errorMsg)
-    //         return
-    //     }
-    // })
+    // 初始化所有模块
+    moduleMgr.loadAll();
 } catch (e) {
-    console.error(e.name, e.message, e.stack)
+    logger.E(e.name, e.message, e.stack)
     return
 }
 

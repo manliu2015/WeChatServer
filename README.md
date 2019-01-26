@@ -1,2 +1,2 @@
 # WeChatServer
-the server for wechat small project
+the server for wechat small project.
