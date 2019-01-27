@@ -3,37 +3,31 @@
 // 模块管理器
 
 var path = require('path')
-var jsModules = require('./config/jsModules')
+var jsModules = require('../config/jsModules')
 
-var ModuleMnager = BaseClass.extend({
-    init: function (){
+var ModuleMnager = SingleClass.extend('ModuleManager', {
+    init: function() {
         // do nothing
     },
-    
+
     // 加载所有模块
-    loadAll: function () {
-        var moduleName
-        for (moduleName in jsModules) {
-            global[moduleName] = require(jsModules[moduleName]).getInstance()
+    loadAll: function() {
+        for (var moduleName in jsModules) {
+            var modulePath = path.join(getBasePath(), jsModules[moduleName])
+            logger.I('load %s ...', modulePath)
+            global[moduleName] = require(modulePath).getInstance()
+            logger.I('load %s ok.', modulePath)
         }
     },
-    
+
     // 通知所有模块准备数据
     prepare: function() {
-        var moduleName
-        for (moduleName in jsModules) {
-            if (global[moduleName])
-                global[moduleName].prepare()
+        for (var moduleName in jsModules) {
+            logger.I('prepare %s ...', moduleName)
+            if (global[moduleName]) global[moduleName].prepare()
+            logger.I('prepare %s ok.', moduleName)
         }
     }
 })
 
-var g_moduleMgr = null
-
-exports.getInstance = function() {
-    if (!g_moduleMgr) {
-        g_moduleMgr = new ModuleMnager()
-    }
-
-    return g_moduleMgr
-}
+exports.getInstance = ModuleMnager.getInstance

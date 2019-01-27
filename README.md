@@ -1,2 +1,13 @@
 # WeChatServer
-the server for wechat small project.
+
+微信小程序/小游戏的服务端解决方案。
+
+v0.1(2019-01-27)
+
+1. 实现基础框架
+2. 实现 http 监听级数据交互
+3. MongoDB 基础模块
+
+v.2(feature)
+
+1. 对接微信 SDK 实现一键登录及微信数据的拉取
