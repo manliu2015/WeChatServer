@@ -2,6 +2,8 @@
 // Create by manliu Jan/20/2019
 // 启动服务器
 
+var repl = require('repl')
+
 // 设置服务器跟路径
 global.getBasePath = function() {
     return __dirname
@@ -55,3 +57,9 @@ try {
 
 initDone = true
 logger.I('server(%s) init done.', serverName)
+
+repl.start({
+    prompt: '>',
+    input: process.stdin,
+    output: process.stdout
+})
